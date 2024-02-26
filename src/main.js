@@ -1,4 +1,4 @@
-import { Logger, log, exception } from "./Logger.js";
+import { Logger, log, exception, LogLevelStyles } from "./Logger.js";
 
 //Try to run some data
 
@@ -17,14 +17,11 @@ for (let i = 0; i < 1000; i++) {
 Logger.shouldLog = true;
 
 console.log("Wait...");
-/* Logger.log("amongus amongus");
-Logger.exception("amongus amongus"); */
 
-myFunc();
-myFunc2();
-
-
-
+log(LogLevelStyles.Info, "Prefix", "My data is here");
+log(LogLevelStyles.Info, "Something aint right");
+log(LogLevelStyles.Warn, "Uh Oh", "My data is here","and here", "and there", "\n", "now here", "thus here %c","there","there","there","there","there");
+log(LogLevelStyles.Warn, "Uh Oh", `your data is ${a}`);
 
 
 function myFunc(arg1){

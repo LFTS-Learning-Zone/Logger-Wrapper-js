@@ -15,14 +15,43 @@ export class Logger{
     static shouldEmbedTimestamp = false;
 
     /**
-     * @type {Function}
-     * @returns {Function}
-    */
-    static log = function(args){
+     * When applying styles, there must be only 1 text being the first argumentent,
+     * the rest arguments must be equivalent are css objects equivalent to the number of %c existant
+     * @param {styleConfig | LogLevelStyles} logLevel 
+     * @param {Array<String>} args 
+     * @returns 
+     */
+    static log = function(logLevel, ...args){
         if(!Logger.shouldLog) return;
+        
+ 
+        let context = "";
+        let strings = args;
+        let styleList;
 
-        let context = `${args}`;
-        return console.log.call(console, context);
+        if(typeof logLevel == "string"){
+            styleList = [logLevel];
+        }
+        else if(typeof logLevel == "object"){
+            styleList = logLevel.styleList;
+        }
+
+        console.log("DEBBUGGING");
+
+        if(strings.length > 1){
+            for (let index = 0; index < strings.length - 1; index++) {
+                styleList.push(LogLevelStyles.NoStyle);       
+            }
+        }
+        //Add space to make it better to read
+        if(strings[1]) strings[1] = " " + strings[1];
+        //Everyone receives
+        strings.forEach((text, i) =>{
+            strings[i] = "%c" + text;
+            context += strings[i];
+        });
+
+        return console.log.call(console, context, ...styleList);
     }
 
     /**
@@ -40,6 +69,18 @@ export class Logger{
     }
 }
 
+export const LogLevelStyles = {
+    Info: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
+    Warn: "background-color: #fef848; color: black; border-radius: 1rem; padding: 0px 4px",
+    Debug: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
+    Error: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
+    NoStyle: "background-color: inherit; color: inherit;"
+}
+
+const styleConfig = {
+    LogLevel: LogLevelStyles.NoStyle,
+    textStyles: [],
+}
 
 export const log = Logger.log;
 export const exception = Logger.exception;
