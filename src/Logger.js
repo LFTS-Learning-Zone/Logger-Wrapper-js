@@ -10,7 +10,7 @@
  *  Logger.exception("NameOfMyException")
  * ```
  */
-class Logger{
+export class Logger{
     static shouldLog = false;
     static shouldEmbedTimestamp = false;
 
@@ -22,7 +22,6 @@ class Logger{
         if(!Logger.shouldLog) return;
 
         let context = `${args}`;
-        /* return Function.prototype.bind.call(console.log, console, context)(); */
         return console.log.call(console, context);
     }
 
@@ -41,8 +40,6 @@ class Logger{
     }
 }
 
-module.exports = {
-    Logger : Logger,
-    log: Logger.log,
-    exception: Logger.exception
-}
+
+export const log = Logger.log;
+export const exception = Logger.exception;
