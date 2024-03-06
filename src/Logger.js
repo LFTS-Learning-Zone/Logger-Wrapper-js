@@ -23,7 +23,38 @@ export class Logger{
      */
     static log = function(logLevel, ...args){
         if(!Logger.shouldLog) return;
-        
+
+        /**
+         * 
+         * TODO:
+         * 
+         * 1. Estudar insercao de objetos como parametro. Talvez console.dir (preferido) ou console.group?
+         * 
+         * 
+         * 
+         * Casos de uso mais comuns:
+         * 0. Qualquer variável
+         * 1. Adicionar somente um texto, sem estilo
+         * 2. Adicionar um texto, com estilo
+         * 3. Adicionar um prefixo com estilo
+         * 4. Adicionar um prefixo com estilo e um texto sem estilo
+         * 5. adicionar um prefixo com estilo e um texto com estilo
+         * 6. adicionr um prefixo e um "titulo" com estilo, e um corpo sem estilo
+        */
+
+        /**
+         * 1 Arg (String, object, var) ==> print direto;
+         * 2 Args <string, string>
+         *      primeiro é estilo? sim -> aplica estilo; não -> printa direto
+         * 2 Args <obj, string>
+         *      primeiro contem:
+         *          1. logLevel? sim -> aplica estilo; não -> printa direto
+         *          2. textStyles? sim -> aplica estilo; não -> printa direto
+         * 3+ Args <string, string, string>
+         * 
+         * 3+ Args <obj, string, string>
+         * 3+ Args <string, obj, string>
+         */
  
         let context = "";
         let strings = args;
@@ -72,8 +103,8 @@ export class Logger{
 export const LogLevelStyles = {
     Info: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
     Warn: "background-color: #fef848; color: black; border-radius: 1rem; padding: 0px 4px",
-    Debug: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
-    Error: "background-color: #8bd2f0; color: white; border-radius: 1rem; padding: 0px 4px",
+    Debug: "background-color: #0442a0; color: white; border-radius: 1rem; padding: 0px 4px",
+    Error: "background-color: #d93209; color: white; border-radius: 1rem; padding: 0px 4px",
     NoStyle: "background-color: inherit; color: inherit;"
 }
 
