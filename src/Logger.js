@@ -67,8 +67,6 @@ export class Logger{
             styleList = logLevel.styleList;
         }
 
-        console.log("DEBBUGGING");
-
         if(strings.length > 1){
             for (let index = 0; index < strings.length - 1; index++) {
                 styleList.push(LogLevelStyles.NoStyle);       
